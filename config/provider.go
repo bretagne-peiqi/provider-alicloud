@@ -16,7 +16,7 @@ import (
 
 const (
 	resourcePrefix = "alicloud"
-	modulePath     = "github.com/huifu/provider-alicloud"
+	modulePath     = "github.com/bretagne-peiqi/provider-alicloud"
 )
 
 //go:embed schema.json

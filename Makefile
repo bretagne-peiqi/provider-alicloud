@@ -8,11 +8,12 @@ PROJECT_REPO := github.com/bretagne-peiqi/$(PROJECT_NAME)
 export TERRAFORM_VERSION := 1.1.6
 
 export TERRAFORM_PROVIDER_SOURCE := aliyun/alicloud
+export TERRAFORM_PROVIDER_REPO := https://github.com/aliyun/terraform-provider-alicloud
 export TERRAFORM_PROVIDER_VERSION := 1.180.0
 export TERRAFORM_PROVIDER_DOWNLOAD_NAME := terraform-provider-alicloud
 export TERRAFORM_PROVIDER_DOWNLOAD_URL_PREFIX := https://github.com/aliyun/terraform-provider-alicloud/tree/v1.180.0
 export TERRAFORM_NATIVE_PROVIDER_BINARY := terraform-provider-alicloud_v1.180.0
-export TERRAFORM_DOCS_PATH := docs/resources
+export TERRAFORM_DOCS_PATH := website/docs/r
 
 PLATFORMS ?= linux_amd64 linux_arm64
 

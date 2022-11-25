@@ -1,0 +1,28 @@
+apiVersion: kvstore.alicloud.upbound.io/v1alpha1
+kind: KvStoreInstance
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kvstore/v1alpha1/kvstoreinstance
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    config:
+      appendonly: "yes"
+      lazyfree-lazy-eviction: "yes"
+    dbInstanceName: tf-test-basic
+    engineVersion: "4.0"
+    instanceClass: redis.master.large.default
+    instanceType: Redis
+    resourceGroupId: rg-123456
+    securityIps:
+    - 10.23.12.24
+    tags:
+      Created: TF
+      For: Test
+    vswitchId: vsw-123456
+    zoneId: cn-beijing-h
+
+---
+
