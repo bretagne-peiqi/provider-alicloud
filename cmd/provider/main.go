@@ -24,12 +24,12 @@ import (
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 
-	"provider-alicloud/apis"
-	"provider-alicloud/apis/v1alpha1"
-	"provider-alicloud/config"
-	"provider-alicloud/internal/clients"
-	"provider-alicloud/internal/controller"
-	"provider-alicloud/internal/features"
+	"github.com/bretagne-peiqi/provider-alicloud/apis"
+	"github.com/bretagne-peiqi/provider-alicloud/apis/v1alpha1"
+	"github.com/bretagne-peiqi/provider-alicloud/config"
+	"github.com/bretagne-peiqi/provider-alicloud/internal/clients"
+	"github.com/bretagne-peiqi/provider-alicloud/internal/controller"
+	"github.com/bretagne-peiqi/provider-alicloud/internal/features"
 )
 
 func main() {

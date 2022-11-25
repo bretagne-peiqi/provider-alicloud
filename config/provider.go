@@ -10,8 +10,8 @@ import (
 
 	ujconfig "github.com/upbound/upjet/pkg/config"
 
-	"provider-alicloud/config/dbInstance"
-	"provider-alicloud/config/kvstoreInstance"
+	"github.com/bretagne-peiqi/provider-alicloud/config/dbInstance"
+	"github.com/bretagne-peiqi/provider-alicloud/config/kvstoreInstance"
 )
 
 const (

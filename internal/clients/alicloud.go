@@ -16,7 +16,7 @@ import (
 
 	"github.com/upbound/upjet/pkg/terraform"
 
-	"provider-alicloud/apis/v1beta1"
+	"github.com/bretagne-peiqi/provider-alicloud/apis/v1beta1"
 )
 
 const (
