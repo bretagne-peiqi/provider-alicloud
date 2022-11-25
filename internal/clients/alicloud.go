@@ -7,6 +7,7 @@ package clients
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 
 	"github.com/crossplane/crossplane-runtime/pkg/resource"
 	"github.com/pkg/errors"
@@ -15,16 +16,27 @@ import (
 
 	"github.com/upbound/upjet/pkg/terraform"
 
-	"github.com/upbound/upjet-provider-template/apis/v1beta1"
+	"provider-alicloud/apis/v1beta1"
 )
 
 const (
+	accessKeyID     = "accessKeyID"
+	accessKeySecret = "accessKeySecret"
+	securityToken   = "securityToken"
+	region          = "region"
+
+	// Alibaba Cloud credentials environment variable names
+	envAliCloudAcessKey  = "ALICLOUD_ACCESS_KEY"
+	envAliCloudSecretKey = "ALICLOUD_SECRET_KEY"
+	envAliCloudRegion    = "ALICLOUD_REGION"
+	envAliCloudStsToken  = "ALICLOUD_SECURITY_TOKEN"
+
 	// error messages
 	errNoProviderConfig     = "no providerConfigRef provided"
 	errGetProviderConfig    = "cannot get referenced ProviderConfig"
 	errTrackUsage           = "cannot track ProviderConfig usage"
 	errExtractCredentials   = "cannot extract credentials"
-	errUnmarshalCredentials = "cannot unmarshal template credentials as JSON"
+	errUnmarshalCredentials = "cannot unmarshal alicloud credentials as JSON"
 )
 
 // TerraformSetupBuilder builds Terraform a terraform.SetupFn function which
@@ -57,11 +69,22 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 		if err != nil {
 			return ps, errors.Wrap(err, errExtractCredentials)
 		}
-		creds := map[string]string{}
-		if err := json.Unmarshal(data, &creds); err != nil {
+		aliCloudCreds := map[string]string{}
+		if err := json.Unmarshal(data, &aliCloudCreds); err != nil {
 			return ps, errors.Wrap(err, errUnmarshalCredentials)
 		}
 
+		// set provider configuration
+		ps.Configuration = map[string]interface{}{
+			"region": "cn-shanghai",
+		}
+		// set environment variables for sensitive provider configuration
+		ps.Env = []string{
+			fmt.Sprintf(fmtEnvVar, envAliCloudAcessKey, aliCloudCreds[accessKeyID]),
+			fmt.Sprintf(fmtEnvVar, envAliCloudSecretKey, aliCloudCreds[accessKeySecret]),
+			fmt.Sprintf(fmtEnvVar, envAliCloudRegion, aliCloudCreds[region]),
+			fmt.Sprintf(fmtEnvVar, envAliCloudStsToken, aliCloudCreds[securityToken]),
+		}
 		// Set credentials in Terraform provider configuration.
 		/*ps.Configuration = map[string]any{
 			"username": creds["username"],
