@@ -1,0 +1,21 @@
+apiVersion: db.alicloud.upbound.io/v1alpha1
+kind: DbInstance
+metadata:
+  annotations:
+    meta.upbound.io/example-id: db/v1alpha1/dbinstance
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    engine: MySQL
+    engineVersion: "5.6"
+    instanceChargeType: Postpaid
+    instanceName: ${var.name}
+    instanceStorage: "30"
+    instanceType: rds.mysql.s2.large
+    monitoringPeriod: "60"
+    vswitchId: ${alicloud_vswitch.example.id}
+
+---
+
